@@ -46,7 +46,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="max-w-3xl mx-auto">
         <Outlet />
       </main>
     </>
