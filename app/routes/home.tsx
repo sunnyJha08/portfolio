@@ -9,8 +9,14 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <button>Click me</button>
+      <h1 className="text-5xl">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+        voluptatem, error necessitatibus sed a officiis ipsa natus! Ab
+        reiciendis aut neque magni ipsum repudiandae quas, aliquid, velit
+        tempore placeat eius.
+      </h1>
     </div>
   );
 }
