@@ -1,7 +1,8 @@
 export function TypographyH1() {
   return (
-    <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance">
-      Sunny Jha: A Full Stack Developer
+    <h1 className="mb-3 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
+      Sunny Jha:-
+      <span className="text-neutral-400"> A Full Stack Developer</span>
     </h1>
   );
 }
@@ -45,8 +46,9 @@ export function TypographyBlockquote() {
 export function TypographyLead() {
   return (
     <p className="text-muted-foreground text-xl">
-      A modal dialog that interrupts the user with important content and expects
-      a response.
+      I build interactive web apps using Typescript, React, Next.js, Bun and
+      PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven
+      by a keen eye for design.
     </p>
   );
 }
