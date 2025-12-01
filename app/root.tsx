@@ -46,7 +46,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <main className="mx-auto max-w-3xl">
+      <main className="mx-auto max-w-3xl px-4 py-16">
         <Outlet />
       </main>
     </>
