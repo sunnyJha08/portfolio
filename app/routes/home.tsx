@@ -1,6 +1,7 @@
 import ProfileImage from "~/components/ui/profileImage";
 import type { Route } from "./+types/home";
 import { TypographyH1, TypographyLead } from "~/components/ui/typography";
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
