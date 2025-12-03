@@ -16,7 +16,7 @@ export default function Header() {
           className={({ isActive }) =>
             isActive
               ? "text-neutral-400"
-              : "text-black hover:underline dark:text-white"
+              : "text-black hover:text-neutral-400 dark:text-white"
           }
         >
           Blogs
@@ -26,7 +26,7 @@ export default function Header() {
           className={({ isActive }) =>
             isActive
               ? "text-neutral-400"
-              : "text-black hover:underline dark:text-white"
+              : "text-black hover:text-neutral-400 dark:text-white"
           }
         >
           Contact
