@@ -8,6 +8,8 @@ import {
 import { Button } from "~/components/ui/button";
 import { FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
+import Example from "~/components/ui/example";
+import LogoClouds from "~/components/ui/logoClouds";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -29,7 +31,7 @@ export default function Home() {
         value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
         className="mb-3"
       />
-      <div className="flex gap-4">
+      <section className="flex gap-4">
         <Link to={"#"} target="_blank">
           <Button variant={"outline"} className="cursor-pointer">
             <FileUser />
@@ -42,7 +44,9 @@ export default function Home() {
             Get in touch
           </Button>
         </Link>
-      </div>
+      </section>
+      <LogoClouds />
+      <Example />
     </>
   );
 }
