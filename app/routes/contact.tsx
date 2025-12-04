@@ -1,3 +1,4 @@
+import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { InputWithLabel, TextareaWithLabel } from "~/components/ui/input";
 import {
@@ -37,7 +38,10 @@ export default function Contact() {
           required={true}
         />
         <TextareaWithLabel />
-        <Button type="submit">Send Message</Button>
+        <Button type="submit">
+          <Send />
+          Send Message
+        </Button>
       </form>
     </div>
   );
