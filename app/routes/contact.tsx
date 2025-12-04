@@ -1,3 +1,4 @@
+import type { log } from "console";
 import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { InputWithLabel, TextareaWithLabel } from "~/components/ui/input";
@@ -8,7 +9,10 @@ import {
 } from "~/components/ui/typography";
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    console.log(e);
+    e.preventDefault();
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
