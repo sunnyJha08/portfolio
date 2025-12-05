@@ -8,7 +8,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
-import Example from "~/components/ui/example";
+import Example from "~/components/ui/projectCardsSection";
 import LogoClouds from "~/components/ui/logoClouds";
 
 export function meta({}: Route.MetaArgs) {
