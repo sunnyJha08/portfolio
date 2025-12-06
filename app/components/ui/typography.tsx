@@ -76,7 +76,7 @@ export function TypographyH4({ value, className }: TypographyProps) {
 }
 
 export function TypographyP({ value, className }: TypographyProps) {
-  const combinedCN = cn("leading-7", "text-muted-foreground", className);
+  const combinedCN = cn("leading-6", "text-muted-foreground", className);
   return <p className={combinedCN}>{value}</p>;
 }
 
