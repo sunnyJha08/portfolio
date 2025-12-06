@@ -1,15 +1,15 @@
 import ProfileImage from "~/components/ui/profileImage";
 import type { Route } from "./+types/home";
 import {
-  TypographyH1,
   TypographyH1WithSpan,
+  TypographyH2,
   TypographyLead,
 } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
 import { FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
-import Example from "~/components/ui/projectCardsSection";
-import LogoClouds from "~/components/ui/logoClouds";
+import { ProjectCards } from "~/components/ui/projectCards";
+import LogoClouds from "~/components/ui/logosCloud";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -45,8 +45,13 @@ export default function Home() {
           </Button>
         </Link>
       </section>
+      <TypographyH2 value="Featured Projects" className="mt-15" />
+      <ProjectCards />
+      <TypographyH2
+        value="Tools & Technologies i know but not limited to"
+        className="mt-15 text-center"
+      />
       <LogoClouds />
-      <Example />
     </>
   );
 }
