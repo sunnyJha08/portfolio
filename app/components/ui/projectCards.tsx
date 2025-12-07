@@ -3,20 +3,44 @@ import { Button } from "./button";
 import {
   ReactLogo,
   AWS,
+  Bash,
   Django,
+  Docker,
+  Express,
   FastAPI,
   Figma,
-  Github,
-  GoLang,
-  Javascript,
-  NextJs,
-  PostgreSQL,
+  Git,
+  GitHub,
+  Go,
+  GraphQL,
+  JavaScript,
+  Jenkins,
+  JSON,
+  Kubernetes,
+  LinkedIn,
+  Linux,
+  Markdown,
+  MongoDB,
+  Nextjs,
+  NGINX,
+  Nodejs,
+  OpenAPI,
+  PostgresSQL,
   Python,
+  Redis,
+  SQLAlchemy,
+  SQLite,
+  SSH,
   Svelte,
+  Swagger,
   TailwindCSS,
-  ViteJs,
-  Typescript,
-} from "../../assets/logos/technologies/technologies";
+  Twitter,
+  TypeScript,
+  Ubuntu,
+  Vercel,
+  Vim,
+  Vitejs,
+} from "../../lib/technologies";
 import { TypographyH3, TypographyP } from "./typography";
 interface CardData {
   id: number;
@@ -41,7 +65,19 @@ const projects: CardData[] = [
       "A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools.",
     liveLink: "#",
     githubLink: "https://github.com/sunnyJha08",
-    logoUrls: [ReactLogo, AWS, Django, FastAPI, Figma],
+    logoUrls: [
+      ReactLogo,
+      AWS,
+      Bash,
+      Django,
+      Docker,
+      Express,
+      FastAPI,
+      Figma,
+      Git,
+      GitHub,
+      Go,
+    ],
   },
   {
     id: 2,
@@ -52,7 +88,18 @@ const projects: CardData[] = [
       "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [GoLang, Javascript, NextJs, PostgreSQL, Typescript],
+    logoUrls: [
+      GraphQL,
+      JavaScript,
+      Jenkins,
+      JSON,
+      Kubernetes,
+      LinkedIn,
+      Linux,
+      Markdown,
+      MongoDB,
+      Nextjs,
+    ],
   },
   {
     id: 3,
@@ -63,7 +110,17 @@ const projects: CardData[] = [
       "Innovative dating platform featuring anonymous questions and authentic connections - currently in development.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [Github, GoLang, Javascript, NextJs, PostgreSQL],
+    logoUrls: [
+      NGINX,
+      Nodejs,
+      OpenAPI,
+      PostgresSQL,
+      Python,
+      Redis,
+      SQLAlchemy,
+      SQLite,
+      SSH,
+    ],
   },
   {
     id: 4,
@@ -74,7 +131,16 @@ const projects: CardData[] = [
       "Real-time music streaming platform with synchronized playback, live chat, and social listening features.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [Python, Svelte, TailwindCSS, ViteJs],
+    logoUrls: [
+      Swagger,
+      TailwindCSS,
+      Twitter,
+      TypeScript,
+      Ubuntu,
+      Vercel,
+      Vim,
+      Vitejs,
+    ],
   },
 ];
 
@@ -114,7 +180,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           onClick={() => window.open(card.githubLink, "_blank")}
           className="cursor-pointer text-black"
         >
-          <img src={Github} alt="Github" className="size-5 text-black" />
+          <img src={GitHub} alt="Github" className="size-5 text-black" />
         </Button>
       </div>
     </div>
