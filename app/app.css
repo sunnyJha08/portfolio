@@ -25,60 +25,16 @@ body {
   }
   100% {
     transform: translateX(-50%);
-  } /* move half the duplicated width */
+  }
 }
 
-/* wrapper that pauses the child animation when hovered */
-.marquee-wrap {
-  position: relative;
-}
-
-/* animated container: width == content width (logos repeated already) */
-.marquee {
-  display: flex; /* horizontal row */
-  align-items: center;
-  width: max-content; /* important: equals the two concatenated sets */
+.marquee-animation {
   animation: marquee 30s linear infinite;
-  will-change: transform; /* hint for smoother animations */
 }
 
-/* pause when wrapper is hovered */
-.marquee-wrap:hover .marquee {
+.marquee-animation:hover {
   animation-play-state: paused;
 }
-
-/* logo images: prevent shrinking, consistent spacing */
-.marquee-img {
-  flex: 0 0 auto; /* don't grow/shrink, keep intrinsic size */
-  height: 50px; /* same as your earlier size */
-  margin: 0 18px; /* adjust spacing as needed */
-  display: block;
-  vertical-align: middle;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* optional gradient edges using CSS mask or pseudo elements */
-/* left gradient */
-.marquee-wrap::before,
-.marquee-wrap::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 120px; /* adjust width of fade */
-  z-index: 20;
-  pointer-events: none;
-}
-.marquee-wrap::before {
-  left: 0;
-  background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
-}
-.marquee-wrap::after {
-  right: 0;
-  background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%);
-}
-
 /* If your page background isn't pure white, replace 'white' above with the page bg color. */
 
 @theme inline {

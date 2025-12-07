@@ -36,16 +36,20 @@ export default function LogosCloud() {
   ];
 
   return (
-    // marquee-wrap is the hover target that will pause the animation
-    <div className="marquee-wrap relative overflow-hidden bg-white py-8">
-      {/* left/right gradient masks (adjust colors to match your background) */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20" />
+    <div className="relative overflow-hidden bg-white py-8">
+      {/* Gradient masks */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-linear-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-linear-to-l from-white to-transparent" />
 
-      {/* the animated element. duplicate logos once inline for seamless loop */}
-      <div className="marquee">
+      {/* Marquee */}
+      <div className="marquee-animation flex" style={{ width: "max-content" }}>
         {[...logos, ...logos].map((src, i) => (
-          <img key={i} src={src} className="marquee-img" alt={`logo-${i}`} />
+          <img
+            key={i}
+            src={src}
+            className="mx-5 h-12 shrink-0"
+            alt={`logo-${i}`}
+          />
         ))}
       </div>
     </div>
