@@ -1,3 +1,12 @@
+import type { Route } from "./+types/blogs";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Sunny Jha | Blogs" },
+    { name: "description", content: "Welcome to Portfolio Website" },
+  ];
+}
+
 export default function Blogs() {
   return (
     <div>

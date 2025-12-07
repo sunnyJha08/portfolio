@@ -3,6 +3,8 @@ import type { Route } from "./+types/home";
 import {
   TypographyH1WithSpan,
   TypographyH2,
+  TypographyH3,
+  TypographyH4,
   TypographyLead,
 } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
@@ -13,8 +15,8 @@ import LogoClouds from "~/components/ui/logosCloud";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Sunny Jha | A Full Stack Developer" },
+    { name: "description", content: "Welcome to Portfolio Website" },
   ];
 }
 
@@ -45,13 +47,15 @@ export default function Home() {
           </Button>
         </Link>
       </section>
-      <TypographyH2 value="Featured Projects" className="mt-15" />
+      <TypographyH2 value="Featured Projects" />
       <ProjectCards />
-      <TypographyH2
-        value="Tools & Technologies i know but not limited to"
+      <TypographyH4
+        value="Tools & Technologies i know "
         className="mt-15 text-center"
       />
       <LogoClouds />
+      <TypographyH4 value='"but not limited to"' className="text-center" />
+      <TypographyH2 value="Technical Writtings" />
     </>
   );
 }

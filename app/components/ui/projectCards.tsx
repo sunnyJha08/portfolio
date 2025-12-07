@@ -15,6 +15,7 @@ import {
   Svelte,
   TailwindCSS,
   ViteJs,
+  Typescript,
 } from "../../assets/logos/technologies/technologies";
 import { TypographyH3, TypographyP } from "./typography";
 interface CardData {
@@ -51,7 +52,7 @@ const projects: CardData[] = [
       "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [GoLang, Javascript, NextJs, PostgreSQL],
+    logoUrls: [GoLang, Javascript, NextJs, PostgreSQL, Typescript],
   },
   {
     id: 3,
@@ -85,11 +86,11 @@ export const Card: React.FC<CardProps> = ({ card }) => {
         alt={card.title}
         className="h-48 w-full object-cover"
       />
-      <div className="flex grow flex-col gap-2 p-4">
+      <div className="flex flex-col gap-2 p-4">
         <TypographyH3 value={card.title} className="" />
         <TypographyP value={card.description} />
       </div>
-      <div className="my-5 flex flex-wrap gap-2 overflow-hidden px-4">
+      <div className="my-5 mt-auto flex flex-wrap gap-2 overflow-hidden px-4">
         {card.logoUrls.map((logoUrl, index) => (
           <img
             key={index}
@@ -105,7 +106,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           onClick={() => window.open(card.liveLink, "_blank")}
           className="cursor-pointer"
         >
-          <Globe />
+          <Globe className="text-green-400" />
           Live Demo
         </Button>
         <Button

@@ -13,6 +13,7 @@ import {
   Svelte,
   TailwindCSS,
   ViteJs,
+  Typescript,
 } from "../../assets/logos/technologies/technologies";
 
 export default function LogosCloud() {
@@ -31,27 +32,21 @@ export default function LogosCloud() {
     FastAPI,
     Django,
     ViteJs,
+    Typescript,
   ];
 
   return (
-    <div className="relative overflow-hidden bg-white py-10">
-      {/* gradient edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-linear-to-l from-transparent to-white"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-linear-to-r from-transparent to-white"></div>
+    // marquee-wrap is the hover target that will pause the animation
+    <div className="marquee-wrap relative overflow-hidden bg-white py-8">
+      {/* left/right gradient masks (adjust colors to match your background) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20" />
 
-      {/* outer wrapper */}
-      <div className="flex whitespace-nowrap">
-        {/* Animated row */}
-        <div className="flex animate-[marquee_30s_linear_infinite]">
-          {logos.map((src, i) => (
-            <img key={i} src={src} className="mx-10 h-[50px]" />
-          ))}
-
-          {/* Repeat once for seamless loop */}
-          {logos.map((src, i) => (
-            <img key={`d-${i}`} src={src} className="mx-10 h-[50px]" />
-          ))}
-        </div>
+      {/* the animated element. duplicate logos once inline for seamless loop */}
+      <div className="marquee">
+        {[...logos, ...logos].map((src, i) => (
+          <img key={i} src={src} className="marquee-img" alt={`logo-${i}`} />
+        ))}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import Python from "./Python.svg";
 import Svelte from "./Svelte.svg";
 import TailwindCSS from "./TailwindCSS.svg";
 import ViteJs from "./Vite.js.svg";
-
+import Typescript from "./TypeScript.svg";
 export {
   ReactLogo,
   AWS,
@@ -28,4 +28,5 @@ export {
   Svelte,
   TailwindCSS,
   ViteJs,
+  Typescript,
 };
