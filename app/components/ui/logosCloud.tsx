@@ -82,7 +82,7 @@ export default function LogosCloud() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-white py-8">
+    <div className="relative overflow-hidden bg-white py-5">
       {/* Gradient masks */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-linear-to-r from-white to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-linear-to-l from-white to-transparent" />

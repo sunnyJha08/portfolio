@@ -54,10 +54,13 @@ export default function Home() {
       <AboutMe />
       <TypographyH4
         value="Tools & Technologies i know "
-        className="mt-15 text-center"
+        className="mt-15 border-b-2 p-2 text-center"
       />
       <LogoClouds />
-      <TypographyH4 value='"but not limited to"' className="text-center" />
+      <TypographyH4
+        value='"but not limited to"'
+        className="border-t-2 p-2 text-center"
+      />
       <TypographyH2 value="Technical Writtings" />
     </>
   );
