@@ -13,6 +13,7 @@ import { Link } from "react-router";
 import { ProjectCards } from "~/components/projectCards";
 import LogoClouds from "~/components/ui/logosCloud";
 import AboutMe from "~/components/ui/aboutMe";
+import { BlogsCards } from "~/components/blogsCards";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -62,6 +63,7 @@ export default function Home() {
         className="border-t-2 p-2 text-center"
       />
       <TypographyH2 value="Technical Writtings" />
+      <BlogsCards />
     </>
   );
 }
