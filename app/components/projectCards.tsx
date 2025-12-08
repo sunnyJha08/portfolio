@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react";
-import { Button } from "./button";
+import { Button } from "./ui/button";
 import {
   ReactLogo,
   AWS,
@@ -40,8 +40,8 @@ import {
   Vercel,
   Vim,
   Vitejs,
-} from "../../lib/technologies";
-import { TypographyH3, TypographyP } from "./typography";
+} from "../lib/technologies";
+import { TypographyH3, TypographyP } from "./ui/typography";
 interface CardData {
   id: number;
   imageUrl: string;
@@ -49,7 +49,7 @@ interface CardData {
   description: string;
   liveLink: string;
   githubLink: string;
-  logoUrls: string[]; //0 <= Array of logo's should be<=8
+  logoUrls: string[]; //0 <= Array of logo's
 }
 interface CardProps {
   card: CardData;
@@ -120,6 +120,7 @@ const projects: CardData[] = [
       SQLAlchemy,
       SQLite,
       SSH,
+      Svelte,
     ],
   },
   {
