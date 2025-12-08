@@ -10,8 +10,9 @@ import {
 import { Button } from "~/components/ui/button";
 import { FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
-import { ProjectCards } from "~/components/ui/projectCards";
+import { ProjectCards } from "~/components/projectCards";
 import LogoClouds from "~/components/ui/logosCloud";
+import AboutMe from "~/components/ui/aboutMe";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -49,6 +50,8 @@ export default function Home() {
       </section>
       <TypographyH2 value="Featured Projects" />
       <ProjectCards />
+      <TypographyH2 value="About Me" />
+      <AboutMe />
       <TypographyH4
         value="Tools & Technologies i know "
         className="mt-15 text-center"
