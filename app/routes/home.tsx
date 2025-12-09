@@ -3,19 +3,19 @@ import type { Route } from "./+types/home";
 import {
   TypographyH1WithSpan,
   TypographyH2,
-  TypographyH3,
-  TypographyH4,
   TypographyLead,
-  TypographyMuted,
-  TypographySmall,
 } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
-import { ArrowDown, FileUser, Send } from "lucide-react";
+import { ChevronDown, FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
 import { ProjectCards } from "~/components/projectCards";
-import LogoClouds from "~/components/ui/logosCloud";
-import AboutMe from "~/components/ui/aboutMe";
 import { BlogsCards } from "~/components/blogsCards";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/components/ui/accordion";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -62,9 +62,18 @@ export default function Home() {
       >
         <Button variant={"ghost"} className="cursor-pointer">
           See All Blogs
-          <ArrowDown />
+          <ChevronDown />
         </Button>
       </Link>
+      <TypographyH2 value="FAQ's ?" />
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </>
   );
 }
