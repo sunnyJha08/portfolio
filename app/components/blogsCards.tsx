@@ -1,7 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import {
-  TypographyH3,
   TypographyH4,
   TypographyMuted,
   TypographyP,

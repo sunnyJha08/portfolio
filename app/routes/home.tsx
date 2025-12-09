@@ -6,9 +6,11 @@ import {
   TypographyH3,
   TypographyH4,
   TypographyLead,
+  TypographyMuted,
+  TypographySmall,
 } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
-import { FileUser, Send } from "lucide-react";
+import { ArrowDown, FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
 import { ProjectCards } from "~/components/projectCards";
 import LogoClouds from "~/components/ui/logosCloud";
@@ -51,11 +53,18 @@ export default function Home() {
       </section>
       <TypographyH2 value="Featured Projects" />
       <ProjectCards />
-      <TypographyH2 value="About Me" />
-      <AboutMe />
 
       <TypographyH2 value="Technical Writtings" />
       <BlogsCards />
+      <Link
+        to={"/blogs"}
+        className="mt-4 flex items-center justify-center gap-1"
+      >
+        <Button variant={"ghost"} className="cursor-pointer">
+          See All Blogs
+          <ArrowDown />
+        </Button>
+      </Link>
     </>
   );
 }
