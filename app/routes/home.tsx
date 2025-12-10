@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
+import Badge from "~/components/ui/badge";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -71,7 +72,7 @@ export default function Home() {
           <ChevronDown />
         </Button>
       </Link>
-      <TypographyH2 value="FAQ's ?" />
+      <TypographyH2 value="Frequently asked questions" />
 
       {/* FAQ's section within Accordion component  */}
       <Accordion type="single" collapsible>

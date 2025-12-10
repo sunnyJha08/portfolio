@@ -1,47 +1,8 @@
 import { Globe } from "lucide-react";
 import { Button } from "./ui/button";
-import {
-  ReactLogo,
-  AWS,
-  Bash,
-  Django,
-  Docker,
-  Express,
-  FastAPI,
-  Figma,
-  Git,
-  GitHub,
-  Go,
-  GraphQL,
-  JavaScript,
-  Jenkins,
-  JSON,
-  Kubernetes,
-  LinkedIn,
-  Linux,
-  Markdown,
-  MongoDB,
-  Nextjs,
-  NGINX,
-  Nodejs,
-  OpenAPI,
-  PostgresSQL,
-  Python,
-  Redis,
-  SQLAlchemy,
-  SQLite,
-  SSH,
-  Svelte,
-  Swagger,
-  TailwindCSS,
-  Twitter,
-  TypeScript,
-  Ubuntu,
-  Vercel,
-  Vim,
-  Vitejs,
-} from "../lib/technologies";
+import { GitHub } from "../lib/technologies";
 import { TypographyH3, TypographyP } from "./ui/typography";
+import Badge from "./ui/badge";
 interface CardData {
   id: number;
   imageUrl: string;
@@ -49,7 +10,7 @@ interface CardData {
   description: string;
   liveLink: string;
   githubLink: string;
-  logoUrls: string[]; //0 <= Array of logo's
+  badges: string[]; //0 <= Array of logo's
 }
 interface CardProps {
   card: CardData;
@@ -65,18 +26,18 @@ const projects: CardData[] = [
       "A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools.",
     liveLink: "#",
     githubLink: "https://github.com/sunnyJha08",
-    logoUrls: [
-      ReactLogo,
-      AWS,
-      Bash,
-      Django,
-      Docker,
-      Express,
-      FastAPI,
-      Figma,
-      Git,
-      GitHub,
-      Go,
+    badges: [
+      "ReactLogo",
+      "AWS",
+      "Bash",
+      "Django",
+      "Docker",
+      "Express",
+      "FastAPI",
+      "Figma",
+      "Git",
+      "GitHub",
+      "Go",
     ],
   },
   {
@@ -88,17 +49,15 @@ const projects: CardData[] = [
       "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [
-      GraphQL,
-      JavaScript,
-      Jenkins,
-      JSON,
-      Kubernetes,
-      LinkedIn,
-      Linux,
-      Markdown,
-      MongoDB,
-      Nextjs,
+    badges: [
+      "GraphQL",
+      "JavaScript",
+      "Jenkins",
+      "JSON",
+      "Kubernetes",
+      "Markdown",
+      "MongoDB",
+      "Nextjs",
     ],
   },
   {
@@ -110,17 +69,15 @@ const projects: CardData[] = [
       "Innovative dating platform featuring anonymous questions and authentic connections - currently in development.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [
-      NGINX,
-      Nodejs,
-      OpenAPI,
-      PostgresSQL,
-      Python,
-      Redis,
-      SQLAlchemy,
-      SQLite,
-      SSH,
-      Svelte,
+    badges: [
+      "NGINX",
+      "Nodejs",
+      "OpenAPI",
+      "PostgresSQL",
+      "Python",
+      "Redis",
+      "SQLAlchemy",
+      "SQLite",
     ],
   },
   {
@@ -132,15 +89,15 @@ const projects: CardData[] = [
       "Real-time music streaming platform with synchronized playback, live chat, and social listening features.",
     liveLink: "#",
     githubLink: "#",
-    logoUrls: [
-      Swagger,
-      TailwindCSS,
-      Twitter,
-      TypeScript,
-      Ubuntu,
-      Vercel,
-      Vim,
-      Vitejs,
+    badges: [
+      "Swagger",
+      "TailwindCSS",
+      "Twitter",
+      "TypeScript",
+      "Ubuntu",
+      "Vercel",
+      "Vim",
+      "Vitejs",
     ],
   },
 ];
@@ -158,15 +115,12 @@ export const Card: React.FC<CardProps> = ({ card }) => {
         <TypographyP value={card.description} />
       </div>
       <div className="my-5 mt-auto flex flex-wrap gap-2 overflow-hidden px-4">
-        {card.logoUrls.map((logoUrl, index) => (
-          <img
-            key={index}
-            src={logoUrl}
-            alt={`Logo ${index + 1}`}
-            className="size-5 rounded-full object-cover sm:size-7"
-          />
+        {card.badges.map((badge, index) => (
+          <Badge key={index} value={badge} />
         ))}
       </div>
+
+      {/* Live links */}
       <div className="flex justify-end gap-4 px-4 pb-4">
         <Button
           variant={"outline"}
