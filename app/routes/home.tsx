@@ -27,6 +27,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      {/* Hero section */}
       <ProfileImage className="mt-15 mb-6 size-24 rounded-full" />
       <TypographyH1WithSpan
         value="Sunny Jha:- "
@@ -37,6 +38,8 @@ export default function Home() {
         value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
         className="mb-3"
       />
+
+      {/* Resume and contact page navigating button  */}
       <section className="flex gap-4">
         <Link to={"#"} target="_blank">
           <Button variant={"outline"} className="cursor-pointer">
@@ -51,9 +54,12 @@ export default function Home() {
           </Button>
         </Link>
       </section>
+
+      {/* Projects Section */}
       <TypographyH2 value="Featured Projects" />
       <ProjectCards />
 
+      {/* Blogs Section  */}
       <TypographyH2 value="Technical Writtings" />
       <BlogsCards />
       <Link
