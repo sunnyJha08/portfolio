@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "~/lib/utils";
 
 interface TypographyProps {
@@ -34,7 +32,7 @@ export function TypographyH1WithSpan({
   return (
     <h1 className={combinedCN}>
       {value}
-      <span className="text-neutral-400"> {spanValue}</span>
+      <span className="text-muted-foreground"> {spanValue}</span>
     </h1>
   );
 }

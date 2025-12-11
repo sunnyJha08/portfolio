@@ -104,14 +104,14 @@ const projects: CardData[] = [
 
 export const Card: React.FC<CardProps> = ({ card }) => {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg transition duration-300 hover:shadow-xl">
+    <div className="border-border bg-card flex h-full flex-col overflow-hidden rounded-lg shadow-sm transition duration-300 hover:shadow-xl">
       <img
         src={card.imageUrl}
         alt={card.title}
         className="h-48 w-full object-cover"
       />
       <div className="flex flex-col gap-2 p-4">
-        <TypographyH3 value={card.title} className="" />
+        <TypographyH3 value={card.title} className="text-card-foreground" />
         <TypographyP value={card.description} />
       </div>
       <div className="my-5 mt-auto flex flex-wrap gap-2 overflow-hidden px-4">
@@ -127,15 +127,19 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           onClick={() => window.open(card.liveLink, "_blank")}
           className="cursor-pointer"
         >
-          <Globe className="text-green-400" />
+          <Globe className="text-card-foreground" />
           Live Demo
         </Button>
         <Button
           variant={"outline"}
           onClick={() => window.open(card.githubLink, "_blank")}
-          className="cursor-pointer text-black"
+          className="cursor-pointer"
         >
-          <img src={GitHub} alt="Github" className="size-5 text-black" />
+          <img
+            src={GitHub}
+            alt="Github"
+            className="text-card-foreground size-5"
+          />
         </Button>
       </div>
     </div>
@@ -144,12 +148,10 @@ export const Card: React.FC<CardProps> = ({ card }) => {
 
 export const ProjectCards: React.FC = () => {
   return (
-    <div className="p-4">
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 overflow-x-hidden">
-        {projects.map((card) => (
-          <Card key={card.id} card={card} />
-        ))}
-      </div>
+    <div className="my-4 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 overflow-x-hidden">
+      {projects.map((card) => (
+        <Card key={card.id} card={card} />
+      ))}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import ProfileImage from "~/components/ui/profileImage";
+import { ProfileImage } from "~/components/ui/profileImage";
 import type { Route } from "./+types/home";
 import {
   TypographyH1WithSpan,
@@ -16,7 +16,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import Badge from "~/components/ui/badge";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -32,14 +31,13 @@ export default function Home() {
       <ProfileImage className="mt-15 mb-6 size-24 rounded-full" />
       <TypographyH1WithSpan
         value="Sunny Jha:- "
-        className="mb-3"
+        className="text-foreground mb-3"
         spanValue="A Full Stack developer."
       />
       <TypographyLead
         value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
         className="mb-3"
       />
-
       {/* Resume and contact page navigating button  */}
       <section className="flex gap-4">
         <Link to={"#"} target="_blank">
@@ -55,14 +53,12 @@ export default function Home() {
           </Button>
         </Link>
       </section>
-
       {/* Projects Section */}
-      <TypographyH2 value="Featured Projects" />
+      <TypographyH2 value="Featured Projects" className="text-primary" />
       <ProjectCards />
-
       {/* Blogs Section  */}
-      <TypographyH2 value="Technical Writtings" />
-      <BlogsCards />
+      <TypographyH2 value="Technical Writtings" className="text-primary" />
+      <BlogsCards limit={4} />
       <Link
         to={"/blogs"}
         className="mt-4 flex items-center justify-center gap-1"
@@ -72,35 +68,37 @@ export default function Home() {
           <ChevronDown />
         </Button>
       </Link>
-      <TypographyH2 value="Frequently asked questions" />
-
+      <TypographyH2
+        value="Frequently asked questions"
+        className="text-primary"
+      />
       {/* FAQ's section within Accordion component  */}
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>What is this component used for?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            It provides a collapsible interface for organizing content.
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-2">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            Yes. It follows the WAI-ARIA design guidelines.
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-3">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>Can I customize its style?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            Yes. You can style it using your preferred CSS or utility classes.
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="item-4">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>Does it support animations?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            Yes. It supports smooth open and close transitions.
           </AccordionContent>
         </AccordionItem>
       </Accordion>

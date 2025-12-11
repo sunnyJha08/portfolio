@@ -1,6 +1,5 @@
-"use client";
 import profileImg from "../../assets/images/profilePic.jpg";
-export default function ProfileImage(props: { className?: string }) {
+export function ProfileImage(props: { className?: string }) {
   return (
     <img
       src={profileImg}
