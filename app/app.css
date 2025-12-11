@@ -17,24 +17,6 @@ body {
     color-scheme: dark;
   }
 }
-
-/* ----- marquee keyframes + classes ----- */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-animation {
-  animation: marquee 30s linear infinite;
-}
-
-.marquee-animation:hover {
-  animation-play-state: paused;
-}
 /* If your page background isn't pure white, replace 'white' above with the page bg color. */
 
 @theme inline {
