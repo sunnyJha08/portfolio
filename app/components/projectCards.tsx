@@ -138,7 +138,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           <img
             src={GitHub}
             alt="Github"
-            className="text-card-foreground size-5"
+            className="text-card-foreground size-5 rounded-full dark:bg-white"
           />
         </Button>
       </div>
