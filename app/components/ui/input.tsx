@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Button } from "./button";
 import { Label } from "./label";
 import { Textarea } from "./textarea";
 import { cn } from "~/lib/utils";
@@ -55,7 +54,7 @@ export function InputWithLabel({
 export function TextareaWithLabel() {
   return (
     <div className="grid w-full gap-3">
-      <Label htmlFor="message">Your message</Label>
+      <Label htmlFor="message">Your message *</Label>
       <Textarea
         placeholder="Type your message here."
         id="message"
