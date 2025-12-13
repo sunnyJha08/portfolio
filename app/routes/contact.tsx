@@ -32,18 +32,20 @@ export default function Contact() {
       <form
         action="# Specifies the URL where the form data will be sent for processing when the form is submitted. This URL typically points to a server-side script or program"
         method="post"
-        className="mt-6 flex w-full max-w-lg flex-col gap-4 rounded-lg border p-4 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+        className="border-border bg-card mt-6 flex w-full max-w-lg flex-col gap-4 rounded-lg p-4 shadow-sm"
         onSubmit={handleSubmit}
       >
         <TypographyH4 value="Send me a message" />
         <InputWithLabel
           htmlForAndId={"senderName"}
-          label={"Name"}
+          label={"Name *"}
           placeholder={"Your Name"}
+          type="text"
+          required={true}
         />
         <InputWithLabel
           htmlForAndId={"email"}
-          label={"Email"}
+          label={"Email *"}
           placeholder={"sunnyjha98971@gmail.com"}
           type={"email"}
           required={true}
