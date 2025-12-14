@@ -8,8 +8,8 @@ import {
 import { Button } from "~/components/ui/button";
 import { ChevronDown, FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
-import { ProjectCards } from "~/components/projectCards";
-import { BlogsCards } from "~/components/blogsCards";
+import { ProjectCardsContainer } from "~/components/projectCards";
+import { BlogsCardsContainer } from "~/components/blogsCards";
 import {
   Accordion,
   AccordionContent,
@@ -59,10 +59,10 @@ export default function Home() {
       </section>
       {/* Projects Section */}
       <TypographyH2 value="Featured Projects" className="text-primary" />
-      <ProjectCards />
+      <ProjectCardsContainer />
       {/* Blogs Section  */}
       <TypographyH2 value="Technical Writtings" className="text-primary" />
-      <BlogsCards limit={4} />
+      <BlogsCardsContainer limit={4} />
       <Link
         to={"/blogs"}
         className="mt-4 flex items-center justify-center gap-1"

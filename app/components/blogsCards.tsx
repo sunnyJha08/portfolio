@@ -115,7 +115,9 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
   );
 };
 
-export const BlogsCards: React.FC<{ limit?: number }> = ({ limit }) => {
+export const BlogsCardsContainer: React.FC<{ limit?: number }> = ({
+  limit,
+}) => {
   const visibleBlogs = limit ? blogs.slice(0, limit) : blogs;
   return (
     <div className="my-4 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 overflow-x-hidden">

@@ -146,7 +146,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
   );
 };
 
-export const ProjectCards: React.FC = () => {
+export const ProjectCardsContainer: React.FC = () => {
   return (
     <div className="my-4 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 overflow-x-hidden">
       {projects.map((card) => (
