@@ -42,6 +42,7 @@ export default function Home() {
         value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
         className="mb-3"
       />
+
       {/* Resume and contact page navigating button  */}
       <section className="flex gap-4">
         <Link to={"#"} target="_blank">
@@ -57,12 +58,16 @@ export default function Home() {
           </Button>
         </Link>
       </section>
+
       {/* Projects Section */}
       <TypographyH2 value="Featured Projects" className="text-primary" />
       <ProjectCardsContainer />
+
       {/* Blogs Section  */}
       <TypographyH2 value="Technical Writtings" className="text-primary" />
       <BlogsCardsContainer limit={4} />
+
+      {/* A link to the Blogs Route */}
       <Link
         to={"/blogs"}
         className="mt-4 flex items-center justify-center gap-1"
@@ -76,6 +81,7 @@ export default function Home() {
         value="Frequently asked questions"
         className="text-primary"
       />
+
       {/* FAQ's section within Accordion component  */}
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
