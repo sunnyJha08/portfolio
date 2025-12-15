@@ -1,5 +1,5 @@
 import { TypographyH1 } from "~/components/ui/typography";
-import { BlogsCards } from "../components/blogsCards";
+import { BlogsCardsContainer } from "../components/blogsCards";
 import type { Route } from "./+types/blogs";
 
 export function meta({}: Route.MetaArgs) {
@@ -13,7 +13,7 @@ export default function Blogs() {
   return (
     <div>
       <TypographyH1 value="Blogs" />
-      <BlogsCards />
+      <BlogsCardsContainer />
     </div>
   );
 }
