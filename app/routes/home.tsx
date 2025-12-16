@@ -16,7 +16,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import ThemeToggle from "~/components/ThemeToggle";
+import { ModeToggle } from "~/components/mode-toggle";
+("~/components/theme-provider");
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -31,7 +32,7 @@ export default function Home() {
       {/* Hero section */}
       <div className="relative w-fit">
         <ProfileImage className="mt-15 mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
-        <ThemeToggle />
+        <ModeToggle />
       </div>
       <TypographyH1WithSpan
         value="Sunny Jha:- "
