@@ -11,7 +11,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import ThemeToggle from "./components/ThemeToggle";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -46,14 +46,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <>
-      <ThemeToggle />
+    <ThemeProvider>
       <Header />
       <main className="mx-auto max-w-3xl px-4 py-4">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }
 
