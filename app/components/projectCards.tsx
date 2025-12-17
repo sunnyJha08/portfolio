@@ -1,6 +1,6 @@
 import { Globe } from "lucide-react";
 import { Button } from "./ui/button";
-import { GitHub } from "../lib/technologies";
+import GitHub from "../assets/logos/technologies/GitHub.svg";
 import { TypographyH3, TypographyP } from "./ui/typography";
 import Badge from "./ui/badge";
 interface CardData {
