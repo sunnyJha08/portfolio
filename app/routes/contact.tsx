@@ -25,7 +25,7 @@ export default function Contact() {
     <div className="flex flex-col items-center justify-center">
       <TypographyH1 value="Contact me" />
       <TypographyLead
-        value="I will get back to you as soon as the Lambda function wakes up and notifies me through SES service."
+        value="Drop in your info here and, I will get back to you."
         className="mt-2 max-w-lg text-center text-neutral-400"
       />
 
