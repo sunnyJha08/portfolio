@@ -1,6 +1,5 @@
-import { Globe } from "lucide-react";
+import { CodeXml, Globe } from "lucide-react";
 import { Button } from "./ui/button";
-import GitHub from "../assets/logos/technologies/GitHub.svg";
 import { TypographyH3, TypographyP } from "./ui/typography";
 import Badge from "./ui/badge";
 interface CardData {
@@ -19,8 +18,7 @@ interface CardProps {
 const projects: CardData[] = [
   {
     id: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1764867147368-9f162d149840?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8",
+    imageUrl: "public/projectImages/screenshot-2025-11-13_20-24-47.png",
     title: "NotesBuddy",
     description:
       "A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools.",
@@ -42,8 +40,7 @@ const projects: CardData[] = [
   },
   {
     id: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1764888802295-648490e594dd?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8",
+    imageUrl: "public/projectImages/screenshot-2025-11-13_20-25-17.png",
     title: "Appwrite MCP Server",
     description:
       "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
@@ -62,8 +59,7 @@ const projects: CardData[] = [
   },
   {
     id: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1764911866779-eb31067c0e5f?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "public/projectImages/screenshot-2025-11-13_20-25-50.png",
     title: "Pasandida Aurat",
     description:
       "Innovative dating platform featuring anonymous questions and authentic connections - currently in development.",
@@ -82,8 +78,7 @@ const projects: CardData[] = [
   },
   {
     id: 4,
-    imageUrl:
-      "https://images.unsplash.com/photo-1764281518120-da4a5757f8af?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "public/projectImages/screenshot-2025-11-13_20-26-03.png",
     title: "Syncify",
     description:
       "Real-time music streaming platform with synchronized playback, live chat, and social listening features.",
@@ -135,11 +130,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           onClick={() => window.open(card.githubLink, "_blank")}
           className="cursor-pointer"
         >
-          <img
-            src={GitHub}
-            alt="Github"
-            className="text-card-foreground size-5 rounded-full dark:bg-white"
-          />
+          <CodeXml />
         </Button>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   TypographyH4,
@@ -105,10 +104,9 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
         <Button
           variant={"link"}
           onClick={() => window.open(card.blogLink, "_blank")}
-          className="cursor-pointer"
+          className="cursor-pointer pr-0"
         >
           Read More
-          <ExternalLink />
         </Button>
       </div>
     </div>
