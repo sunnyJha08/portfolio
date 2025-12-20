@@ -46,7 +46,11 @@ export default function Home() {
 
       {/* Resume and contact page navigating button  */}
       <section className="flex gap-4">
-        <Link to={"#"} target="_blank">
+        <Link
+          to={
+            "https://docs.google.com/document/d/1pKFNbJ28OiDXfHsG8rIfnGwz1360jPJ_RCnpRStaLL8/edit?usp=sharing"
+          }
+        >
           <Button variant={"outline"} className="cursor-pointer">
             <FileUser />
             Resume / CV
