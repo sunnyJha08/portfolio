@@ -118,6 +118,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
       {/* Live links */}
       <div className="flex justify-end gap-4 px-4 pb-4">
         <Button
+          aria-label="Live demo button"
           variant={"outline"}
           onClick={() => window.open(card.liveLink, "_blank")}
           className="cursor-pointer"
@@ -126,6 +127,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
           Live Demo
         </Button>
         <Button
+          aria-label="Source code button"
           variant={"outline"}
           onClick={() => window.open(card.githubLink, "_blank")}
           className="cursor-pointer"

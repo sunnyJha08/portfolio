@@ -7,6 +7,7 @@ export function ModeToggle() {
 
   return (
     <Button
+      aria-label="theme-toggler button"
       onClick={toggleTheme}
       className="absolute right-0 bottom-0 size-8 cursor-pointer rounded-full"
     >

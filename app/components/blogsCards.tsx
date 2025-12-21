@@ -105,6 +105,7 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
           variant={"link"}
           onClick={() => window.open(card.blogLink, "_blank")}
           className="cursor-pointer pr-0"
+          aria-label="Read more button"
         >
           Read More
         </Button>

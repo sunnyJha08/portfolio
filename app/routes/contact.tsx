@@ -51,7 +51,11 @@ export default function Contact() {
           required={true}
         />
         <TextareaWithLabel />
-        <Button type="submit" className="cursor-pointer">
+        <Button
+          type="submit"
+          className="cursor-pointer"
+          aria-label="Send message button"
+        >
           <Send />
           Send Message
         </Button>

@@ -51,13 +51,17 @@ export default function Home() {
             "https://docs.google.com/document/d/1pKFNbJ28OiDXfHsG8rIfnGwz1360jPJ_RCnpRStaLL8/edit?usp=sharing"
           }
         >
-          <Button variant={"outline"} className="cursor-pointer">
+          <Button
+            variant={"outline"}
+            className="cursor-pointer"
+            aria-label="Resume button"
+          >
             <FileUser />
             Resume / CV
           </Button>
         </Link>
         <Link to={"/contact"}>
-          <Button className="cursor-pointer">
+          <Button className="cursor-pointer" aria-label="Contact button">
             <Send />
             Get in touch
           </Button>
