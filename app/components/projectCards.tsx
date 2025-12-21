@@ -18,7 +18,7 @@ interface CardProps {
 const projects: CardData[] = [
   {
     id: 1,
-    imageUrl: "public/projectImages/screenshot-2025-11-13_20-24-47.png",
+    imageUrl: "/projectImages/screenshot-2025-11-13_20-24-47.png",
     title: "NotesBuddy",
     description:
       "A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools.",
@@ -40,7 +40,7 @@ const projects: CardData[] = [
   },
   {
     id: 2,
-    imageUrl: "public/projectImages/screenshot-2025-11-13_20-25-17.png",
+    imageUrl: "/projectImages/screenshot-2025-11-13_20-25-17.png",
     title: "Appwrite MCP Server",
     description:
       "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
@@ -59,7 +59,7 @@ const projects: CardData[] = [
   },
   {
     id: 3,
-    imageUrl: "public/projectImages/screenshot-2025-11-13_20-25-50.png",
+    imageUrl: "/projectImages/screenshot-2025-11-13_20-25-50.png",
     title: "Pasandida Aurat",
     description:
       "Innovative dating platform featuring anonymous questions and authentic connections - currently in development.",
@@ -78,7 +78,7 @@ const projects: CardData[] = [
   },
   {
     id: 4,
-    imageUrl: "public/projectImages/screenshot-2025-11-13_20-26-03.png",
+    imageUrl: "/projectImages/screenshot-2025-11-13_20-26-03.png",
     title: "Syncify",
     description:
       "Real-time music streaming platform with synchronized playback, live chat, and social listening features.",
