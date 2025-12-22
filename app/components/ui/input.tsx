@@ -30,37 +30,3 @@ export function Input({
     />
   );
 }
-
-export function InputWithLabel({
-  htmlForAndId,
-  label,
-  placeholder,
-  type,
-  required,
-}: InputWithLabelProps) {
-  return (
-    <div className="grid w-full items-center gap-3">
-      <Label htmlFor={htmlForAndId}>{label}</Label>
-      <Input
-        type={type}
-        id={htmlForAndId}
-        placeholder={placeholder}
-        required={required}
-      />
-    </div>
-  );
-}
-
-export function TextareaWithLabel() {
-  return (
-    <div className="grid w-full gap-3">
-      <Label htmlFor="message">Your message *</Label>
-      <Textarea
-        placeholder="Type your message here."
-        id="message"
-        required
-        maxLength={1000}
-      />
-    </div>
-  );
-}
