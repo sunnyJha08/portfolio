@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Label } from "./label";
-import { Textarea } from "./textarea";
 import { cn } from "~/lib/utils";
 
 interface InputWithLabelProps {

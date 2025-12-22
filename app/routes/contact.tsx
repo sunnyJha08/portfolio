@@ -1,16 +1,11 @@
 import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import {
-  Input,
-  InputWithLabel,
-  TextareaWithLabel,
-} from "~/components/ui/input";
+import { Input } from "~/components/ui/input";
 import {
   TypographyH1,
   TypographyH4,
   TypographyLead,
   TypographyMuted,
-  TypographyP,
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
