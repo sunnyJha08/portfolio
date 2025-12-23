@@ -85,6 +85,7 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
         <a
           href={card.blogLink}
           target="_blank"
+          aria-label="blog link"
           className="cursor-pointer hover:underline"
         >
           <TypographySmall value="Read more" />

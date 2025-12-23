@@ -60,7 +60,7 @@ export default function Home() {
             Resume / CV
           </Button>
         </Link>
-        <Link to={"/contact"}>
+        <Link to={"/contact"} aria-label="Contact page link">
           <Button className="cursor-pointer" aria-label="Contact button">
             <Send />
             Get in touch
@@ -79,6 +79,7 @@ export default function Home() {
       {/* A link to the Blogs Route */}
       <Link
         to={"/blogs"}
+        aria-label="Blogs page link"
         className="mt-4 flex items-center justify-center gap-1"
       >
         <Button variant={"ghost"} className="cursor-pointer">
