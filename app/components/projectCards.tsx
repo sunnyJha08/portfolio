@@ -103,6 +103,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
       <img
         src={card.imageUrl}
         alt={card.title}
+        loading="lazy"
         className="h-48 w-full object-cover"
       />
       <div className="flex flex-col gap-2 p-4">
