@@ -19,12 +19,13 @@ import {
 import { ModeToggle } from "~/components/mode-toggle";
 ("~/components/theme-provider");
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Sunny Jha | A Full Stack Developer" },
-    { name: "description", content: "Welcome to Portfolio Website" },
-  ];
-}
+export const meta = ({}: Route.MetaArgs) => [
+  { title: "Sunny Jha - Portfolio" },
+  {
+    name: "description",
+    content: "Projects, blogs, and contact information.",
+  },
+];
 
 export default function Home() {
   return (

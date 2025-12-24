@@ -2,6 +2,7 @@ import { CodeXml, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { TypographyH3, TypographyP } from "./ui/typography";
 import Badge from "./ui/badge";
+
 interface CardData {
   id: number;
   imageUrl: string;

@@ -15,8 +15,8 @@ import { Textarea } from "~/components/ui/textarea";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Sunny Jha | Contact Page" },
-    { name: "description", content: "Welcome to Portfolio Website" },
+    { title: "Contact | Sunny Jha" },
+    { name: "description", content: "Contact me by filling the form." },
   ];
 }
 

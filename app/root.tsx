@@ -13,6 +13,15 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import { ThemeProvider } from "./components/theme-provider";
 
+export const meta = () => [
+  { title: "Your Name — Full-Stack Developer" },
+  {
+    name: "description",
+    content:
+      "Full-stack developer building scalable web applications with React, serverless, and modern tooling.",
+  },
+];
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {

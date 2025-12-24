@@ -4,8 +4,11 @@ import type { Route } from "./+types/blogs";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Sunny Jha | Blogs" },
-    { name: "description", content: "Welcome to Portfolio Website" },
+    { title: "Blogs | Sunny Jha" },
+    {
+      name: "description",
+      content: "Technical blogs and articles written by me.",
+    },
   ];
 }
 
