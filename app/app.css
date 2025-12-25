@@ -15,7 +15,6 @@ body {
     color-scheme: dark;
   }
 }
-/* If your page background isn't pure white, replace 'white' above with the page bg color. */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

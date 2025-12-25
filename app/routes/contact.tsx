@@ -2,7 +2,6 @@ import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
-  TypographyH1,
   TypographyH4,
   TypographyLead,
   TypographyMuted,
@@ -31,6 +30,10 @@ export function ContactForm() {
       className="border-border bg-card flex w-full flex-col gap-4 rounded-lg p-4 shadow-sm"
       onSubmit={handleSubmit}
     >
+      <TypographyLead
+        value="
+      Send Message"
+      />
       <div className="space-y-2">
         <Label htmlFor="name">Name *</Label>
         <Input type="text" required placeholder="Your name" />
@@ -51,7 +54,10 @@ export function ContactForm() {
 
       <div className="space-y-2">
         <Label>Your message *</Label>
-        <Textarea className="h-30" />
+        <Textarea
+          className="h-30"
+          placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
+        />
         <TypographySmall
           value="Message must be at least 10 characters."
           className="text-destructive hidden"
@@ -71,13 +77,8 @@ export function ContactForm() {
 export default function Contact() {
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center justify-center">
-      <TypographyH1 value="Contact me" />
-      <TypographyLead
-        value="Drop in your info here and, I will get back to you."
-        className="my-2 max-w-lg text-center text-neutral-400"
-      />
-      <div className="my-6 w-full space-y-2 text-left">
-        <TypographyH4 value="Send me a message" />
+      <div className="my-6 w-full space-y-2 text-center">
+        <TypographyH4 value="Let's work together, or have a small conversation" />
         <TypographyMuted value="Fill out the form below and I will get back to you as soon as possible." />
       </div>
       <ContactForm />
