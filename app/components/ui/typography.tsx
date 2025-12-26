@@ -1,7 +1,7 @@
 import { cn } from "~/lib/utils";
 
 interface TypographyProps {
-  value: string | string[];
+  value: any;
   className?: string;
   spanValue?: string;
 }
