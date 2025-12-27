@@ -85,10 +85,10 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
         <a
           href={card.blogLink}
           target="_blank"
-          aria-label="blog link"
+          aria-label={card.title}
           className="cursor-pointer hover:underline"
         >
-          <TypographySmall value="Read more" />
+          <TypographySmall value="Learn more" />
         </a>
       </div>
     </div>
