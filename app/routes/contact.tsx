@@ -1,4 +1,4 @@
-import { Send, CircleX, CircleCheck } from "lucide-react";
+import { Send, CircleX, CircleCheck, Info, CircleAlert } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -8,17 +8,17 @@ import {
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
-import { data, Form, redirect, useActionData } from "react-router";
+import { Form, redirect, useNavigation, useSubmit } from "react-router";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import { toast } from "sonner";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { Spinner } from "~/components/ui/spinner";
 
 import { Resend } from "resend";
 import { z } from "zod";
-import { Toaster } from "sonner";
+import { useEffect } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -49,151 +49,238 @@ const contactFormSchema = z.object({
 
 type SubmitFormSchemaType = z.infer<typeof contactFormSchema>;
 
-const onSubmit: SubmitHandler<SubmitFormSchemaType> = async (data) => {
-  console.log(data);
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-};
+// Rate limiting storage (in production, use Redis or database)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
-export function ContactForm({ actionData }: Route.ComponentProps) {
-  const { serverError } = actionData || {};
+// Helper function to check rate limit
+function checkRateLimit(ip: string): { allowed: boolean; message?: string } {
+  const now = Date.now();
+  const limit = rateLimitStore.get(ip);
+
+  // If no record or reset time passed, allow and create new record
+  if (!limit || now > limit.resetTime) {
+    rateLimitStore.set(ip, {
+      count: 1,
+      resetTime: now + 12 * 60 * 60 * 1000, // 12 hours from now
+    });
+    return { allowed: true };
+  }
+
+  // Check if limit exceeded
+  if (limit.count >= 2) {
+    const hoursLeft = Math.ceil((limit.resetTime - now) / (60 * 60 * 1000));
+    return {
+      allowed: false,
+      message: `Rate limit exceeded. You can submit 2 messages every 12 hours. Try again in ${hoursLeft} hour(s).`,
+    };
+  }
+
+  // Increment count
+  limit.count++;
+  return { allowed: true };
+}
+const onSubmit: SubmitHandler<SubmitFormSchemaType> = async (data) => {
+  // onSubmit(data, { method: "post" });
+};
+export default function ContactPage({ actionData }: Route.ComponentProps) {
+  const submit = useSubmit();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   const {
     register,
     handleSubmit,
-    formState: { errors: clientError, isSubmitting },
+    formState: { errors: clientError },
+    reset,
   } = useForm<SubmitFormSchemaType>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  // const {error, setError} = useState(clientError)
+  // Show toast based on actionData
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.emailSuccess) {
+        toast.success("Message sent successfully!", {
+          description: "I'll get back to you as soon as possible.",
+        });
+        reset();
+      } else if (actionData.emailError) {
+        toast.error("Failed to send message", {
+          description: actionData.emailError,
+        });
+      } else if (actionData.methodError) {
+        toast.error("Error", {
+          description: actionData.methodError,
+        });
+      } else if (actionData.rateLimitError) {
+        toast.error("Rate limit exceeded", {
+          description: actionData.rateLimitError,
+        });
+      } else if (actionData.serverFormValidationError?.fieldErrors) {
+        const firstError = Object.values(
+          actionData.serverFormValidationError.fieldErrors,
+        )[0];
+        if (firstError && firstError[0]) {
+          toast.error("Validation error", {
+            description: firstError[0],
+          });
+        }
+      }
+    }
+  }, [actionData, reset]);
+
+  const onSubmit: SubmitHandler<SubmitFormSchemaType> = (data) => {
+    // Submit form data to action
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("message", data.message);
+
+    submit(formData, { method: "post" });
+  };
 
   return (
-    <Form
-      method="post"
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-      className="border-border bg-card flex w-full flex-col gap-4 rounded-lg p-4 shadow-sm"
-    >
-      <TypographyLead value="Send Message" />
-      <div className="space-y-2">
-        <Label htmlFor="name">Name *</Label>
-        <Input
-          {...register("name")}
-          type="text"
-          id="name"
-          autoComplete="username"
-          placeholder="Your name"
-        />
-        {clientError?.name?.message && (
-          <TypographySmall
-            value={clientError.name.message}
-            className="text-destructive"
-          />
-        )}
-        {serverError?.fieldErrors.name && (
-          <TypographySmall
-            value={serverError.fieldErrors.name}
-            className="text-destructive"
-          />
-        )}
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="email">Email *</Label>
-        <Input
-          {...register("email")}
-          type="email"
-          id="email"
-          autoComplete="email"
-          placeholder="sunnyjha98971@gmail.com"
-        />
-        {clientError?.email?.message && (
-          <TypographySmall
-            value={clientError.email.message}
-            className="text-destructive"
-          />
-        )}
-        {serverError?.fieldErrors.email && (
-          <TypographySmall
-            value={serverError?.fieldErrors.email}
-            className="text-destructive"
-          />
-        )}
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="message">Your message *</Label>
-        <Textarea
-          {...register("message")}
-          id="message"
-          className="h-30"
-          placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
-        />
-        {clientError?.message?.message && (
-          <TypographySmall
-            value={clientError.message.message}
-            className="text-destructive"
-          />
-        )}
-        {serverError?.fieldErrors.message && (
-          <TypographySmall
-            value={serverError?.fieldErrors.message}
-            className="text-destructive"
-          />
-        )}
-      </div>
-
-      <Button
-        type="submit"
-        className="cursor-pointer"
-        aria-label="Send message button"
-      >
-        {isSubmitting ? <Spinner /> : <Send />}
-        Send Message
-      </Button>
-    </Form>
-  );
-}
-
-export default function ContactPage() {
-  const actionData = useActionData<typeof action>();
-  return (
-    <div className="mx-auto flex max-w-lg flex-col items-center justify-center">
+    <div className="mx-auto mt-4 flex max-w-lg flex-col items-center justify-center">
       <div className="my-6 w-full space-y-2 text-center">
         <TypographyH4 value="Let's work together, or have a small conversation" />
         <TypographyMuted value="Fill out the form below and I will get back to you as soon as possible." />
       </div>
-      <ContactForm actionData={actionData} />
+      <Form
+        method="post"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        className="border-border bg-card flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
+      >
+        <TypographyLead value="Send Message" />
+
+        <div className="space-y-2">
+          <Label htmlFor="name">Name *</Label>
+          <Input
+            {...register("name")}
+            type="text"
+            id="name"
+            name="name"
+            autoComplete="name"
+            placeholder="Your name"
+            disabled={isSubmitting}
+          />
+          {clientError?.name?.message && (
+            <TypographySmall
+              value={clientError.name.message}
+              className="text-destructive"
+            />
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="email">Email *</Label>
+          <Input
+            {...register("email")}
+            type="email"
+            id="email"
+            name="email"
+            autoComplete="email"
+            placeholder="sunnyjha98971@gmail.com"
+            disabled={isSubmitting}
+          />
+          {clientError?.email?.message && (
+            <TypographySmall
+              value={clientError.email.message}
+              className="text-destructive"
+            />
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="message">Your message *</Label>
+          <Textarea
+            {...register("message")}
+            id="message"
+            name="message"
+            className="h-30"
+            placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
+            disabled={isSubmitting}
+          />
+          {clientError?.message?.message && (
+            <TypographySmall
+              value={clientError.message.message}
+              className="text-destructive"
+            />
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          className="cursor-pointer"
+          aria-label="Send message button"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? <Spinner /> : <Send />}
+          {isSubmitting ? "Sending..." : "Send Message"}
+        </Button>
+      </Form>
     </div>
   );
 }
 
 export async function action({ request }: Route.ActionArgs) {
+  if (request.method.toLowerCase() !== "post") {
+    return { methodError: "Method not allowed" };
+  }
+
+  // Get client IP for rate limiting
+  const ip =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+
+  // Check rate limit
+  const rateLimitCheck = checkRateLimit(ip);
+  if (!rateLimitCheck.allowed) {
+    return { rateLimitError: rateLimitCheck.message };
+  }
+
   const formData = await request.formData();
   const formValues = Object.fromEntries(formData);
   const validatedForm = contactFormSchema.safeParse(formValues);
-  //Destructure variables from the validated
-  if (!validatedForm.success)
-    return { serverError: z.flattenError(validatedForm.error) };
 
-  const { name, email, message } = validatedForm.data;
-  const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+  if (!validatedForm.success) {
+    const fieldErrors: Record<string, string[]> = {};
 
-  const { data, error } = await resend.emails.send({
-    from: "Acme <onboarding@resend.dev>",
-    to: ["sunnyjha98971@gmail.com"],
-    subject: "New Contact Form Submission",
-    html: `
-        <h2>New message from ${name}</h2>
-        <p><strong>From:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-  });
+    for (const issue of validatedForm.error.issues) {
+      const path = issue.path[0] as string;
+      if (!fieldErrors[path]) {
+        fieldErrors[path] = [];
+      }
+      fieldErrors[path].push(issue.message);
+    }
 
-  if (error) return Response.json({ error });
+    return { serverFormValidationError: { fieldErrors } };
+  }
 
-  if (data) return Response.json({ data });
-  return redirect("/");
+  try {
+    const { name, email, message } = validatedForm.data;
+    const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+
+    await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: ["sunnyjha98971@gmail.com"],
+      subject: "Portfolio Contact Form Submission",
+      html: `
+          <h2>New message from ${name}</h2>
+          <p><strong>From:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        `,
+    });
+
+    return redirect("/") && { emailSuccess: "Email sent successfully!" };
+  } catch (error) {
+    console.error("Email sending error:", error);
+    return {
+      emailError:
+        "Failed to send email. Please try again later or contact directly at sunnyjha98971@gmail.com",
+    };
+  }
 }
