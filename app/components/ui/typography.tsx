@@ -94,7 +94,7 @@ export function TypographyLarge({ value, className }: TypographyProps) {
 }
 
 export function TypographySmall({ value, className }: TypographyProps) {
-  const combinedCN = cn("text-sm", "leading-none", "font-medium", className);
+  const combinedCN = cn("text-sm", "leading-5", "font-medium", className);
   return <div className={combinedCN}>{value}</div>;
 }
 
