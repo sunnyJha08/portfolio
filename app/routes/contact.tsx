@@ -79,9 +79,7 @@ function checkRateLimit(ip: string): { allowed: boolean; message?: string } {
   limit.count++;
   return { allowed: true };
 }
-const onSubmit: SubmitHandler<SubmitFormSchemaType> = async (data) => {
-  // onSubmit(data, { method: "post" });
-};
+
 export default function ContactPage({ actionData }: Route.ComponentProps) {
   const submit = useSubmit();
   const navigation = useNavigation();
@@ -97,7 +95,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
   });
 
   // Show toast based on actionData
-  useEffect(() => {
+  /* useEffect(() => {
     if (actionData) {
       if (actionData.emailSuccess) {
         toast.success("Message sent successfully!", {
@@ -127,7 +125,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
         }
       }
     }
-  }, [actionData, reset]);
+  }, [actionData, reset]); */
 
   const onSubmit: SubmitHandler<SubmitFormSchemaType> = (data) => {
     // Submit form data to action
@@ -140,86 +138,92 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
   };
 
   return (
-    <div className="mx-auto mt-4 flex max-w-lg flex-col items-center justify-center">
-      <div className="my-6 w-full space-y-2 text-center">
-        <TypographyH4 value="Let's work together, or have a small conversation" />
-        <TypographyMuted value="Fill out the form below and I will get back to you as soon as possible." />
-      </div>
-      <Form
-        method="post"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-        className="border-border bg-card flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
-      >
-        <TypographyLead value="Send Message" />
-
-        <div className="space-y-2">
-          <Label htmlFor="name">Name *</Label>
-          <Input
-            {...register("name")}
-            type="text"
-            id="name"
-            name="name"
-            autoComplete="name"
-            placeholder="Your name"
-            disabled={isSubmitting}
-          />
-          {clientError?.name?.message && (
-            <TypographySmall
-              value={clientError.name.message}
-              className="text-destructive"
-            />
-          )}
+    <>
+      {actionData?.emailSuccess && (
+        <div>{toast.success(actionData.emailSuccess)}</div>
+      )}
+      {actionData?.emailError && toast.error(actionData.emailError)}
+      <div className="mx-auto mt-4 flex max-w-lg flex-col items-center justify-center">
+        <div className="my-6 w-full space-y-2 text-center">
+          <TypographyH4 value="Let's work together, or have a small conversation" />
+          <TypographyMuted value="Fill out the form below and I will get back to you as soon as possible." />
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="email">Email *</Label>
-          <Input
-            {...register("email")}
-            type="email"
-            id="email"
-            name="email"
-            autoComplete="email"
-            placeholder="sunnyjha98971@gmail.com"
-            disabled={isSubmitting}
-          />
-          {clientError?.email?.message && (
-            <TypographySmall
-              value={clientError.email.message}
-              className="text-destructive"
-            />
-          )}
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="message">Your message *</Label>
-          <Textarea
-            {...register("message")}
-            id="message"
-            name="message"
-            className="h-30"
-            placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
-            disabled={isSubmitting}
-          />
-          {clientError?.message?.message && (
-            <TypographySmall
-              value={clientError.message.message}
-              className="text-destructive"
-            />
-          )}
-        </div>
-
-        <Button
-          type="submit"
-          className="cursor-pointer"
-          aria-label="Send message button"
-          disabled={isSubmitting}
+        <Form
+          method="post"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className="border-border bg-card flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
         >
-          {isSubmitting ? <Spinner /> : <Send />}
-          {isSubmitting ? "Sending..." : "Send Message"}
-        </Button>
-      </Form>
-    </div>
+          <TypographyLead value="Send Message" />
+
+          <div className="space-y-2">
+            <Label htmlFor="name">Name *</Label>
+            <Input
+              {...register("name")}
+              type="text"
+              id="name"
+              name="name"
+              autoComplete="name"
+              placeholder="Your name"
+              disabled={isSubmitting}
+            />
+            {clientError?.name?.message && (
+              <TypographySmall
+                value={clientError.name.message}
+                className="text-destructive"
+              />
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email">Email *</Label>
+            <Input
+              {...register("email")}
+              type="email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              placeholder="sunnyjha98971@gmail.com"
+              disabled={isSubmitting}
+            />
+            {clientError?.email?.message && (
+              <TypographySmall
+                value={clientError.email.message}
+                className="text-destructive"
+              />
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Your message *</Label>
+            <Textarea
+              {...register("message")}
+              id="message"
+              name="message"
+              className="h-30"
+              placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
+              disabled={isSubmitting}
+            />
+            {clientError?.message?.message && (
+              <TypographySmall
+                value={clientError.message.message}
+                className="text-destructive"
+              />
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            className="cursor-pointer"
+            aria-label="Send message button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Spinner /> : <Send />}
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </Button>
+        </Form>
+      </div>
+    </>
   );
 }
 
@@ -245,17 +249,7 @@ export async function action({ request }: Route.ActionArgs) {
   const validatedForm = contactFormSchema.safeParse(formValues);
 
   if (!validatedForm.success) {
-    const fieldErrors: Record<string, string[]> = {};
-
-    for (const issue of validatedForm.error.issues) {
-      const path = issue.path[0] as string;
-      if (!fieldErrors[path]) {
-        fieldErrors[path] = [];
-      }
-      fieldErrors[path].push(issue.message);
-    }
-
-    return { serverFormValidationError: { fieldErrors } };
+    return { serverFormValidationError: validatedForm.error };
   }
 
   try {
