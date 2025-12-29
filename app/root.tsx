@@ -12,6 +12,7 @@ import "./app.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import { ThemeProvider } from "./components/theme-provider";
+import { Toaster } from "sonner";
 
 export const meta = () => [
   { title: "Your Name — Full-Stack Developer" },
@@ -60,6 +61,7 @@ export default function App() {
       <main className="relative mx-auto max-w-3xl px-4 py-4">
         <Outlet />
       </main>
+      <Toaster />
       <Footer />
     </ThemeProvider>
   );
