@@ -8,7 +8,13 @@ import {
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
-import { Form, redirect, useNavigation, useSubmit } from "react-router";
+import {
+  Form,
+  Navigate,
+  redirect,
+  useNavigation,
+  useSubmit,
+} from "react-router";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "sonner";
@@ -18,7 +24,7 @@ import { Spinner } from "~/components/ui/spinner";
 
 import { Resend } from "resend";
 import { z } from "zod";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -71,7 +77,7 @@ function checkRateLimit(ip: string): { allowed: boolean; message?: string } {
     const hoursLeft = Math.ceil((limit.resetTime - now) / (60 * 60 * 1000));
     return {
       allowed: false,
-      message: `Rate limit exceeded. You can submit 2 messages every 12 hours. Try again in ${hoursLeft} hour(s).`,
+      message: `Rate limit exceeded. You can submit 2 messages every 12 hours. Try again in ${hoursLeft} hour(s) or email me directly at 'sunnyjha98971@gmail.com.`,
     };
   }
 
@@ -95,54 +101,56 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
   });
 
   // Show toast based on actionData
-  /* useEffect(() => {
-    if (actionData) {
-      if (actionData.emailSuccess) {
-        toast.success("Message sent successfully!", {
-          description: "I'll get back to you as soon as possible.",
-        });
-        reset();
-      } else if (actionData.emailError) {
-        toast.error("Failed to send message", {
-          description: actionData.emailError,
-        });
-      } else if (actionData.methodError) {
-        toast.error("Error", {
-          description: actionData.methodError,
-        });
-      } else if (actionData.rateLimitError) {
-        toast.error("Rate limit exceeded", {
-          description: actionData.rateLimitError,
-        });
-      } else if (actionData.serverFormValidationError?.fieldErrors) {
-        const firstError = Object.values(
-          actionData.serverFormValidationError.fieldErrors,
-        )[0];
-        if (firstError && firstError[0]) {
-          toast.error("Validation error", {
-            description: firstError[0],
-          });
-        }
-      }
+
+  const hasShownToast = useRef(false);
+
+  useEffect(() => {
+    if (!actionData || hasShownToast.current) return;
+
+    if (actionData.emailSuccess) {
+      toast.success("Message sent successfully!", {
+        description: "I'll get back to you as soon as possible.",
+      });
+      reset();
+      <Navigate to={"/"} />;
     }
-  }, [actionData, reset]); */
+
+    if (actionData.emailError) {
+      toast.error("Failed to send message", {
+        description: actionData.emailError,
+      });
+    }
+
+    if (actionData.methodError) {
+      toast.warning(actionData.methodError);
+    }
+
+    if (actionData.rateLimitError) {
+      toast.warning("Rate limit exceeded", {
+        description: actionData.rateLimitError,
+      });
+    }
+
+    if (actionData?.serverFormValidationError) {
+      toast.error(
+        actionData.serverFormValidationError.map((e) => e.message).join(", "),
+        {
+          description: "Form validation error.",
+        },
+      );
+    }
+
+    hasShownToast.current = true;
+  }, [actionData, reset]);
 
   const onSubmit: SubmitHandler<SubmitFormSchemaType> = (data) => {
     // Submit form data to action
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("message", data.message);
 
-    submit(formData, { method: "post" });
+    submit(data, { method: "post" });
   };
 
   return (
     <>
-      {actionData?.emailSuccess && (
-        <div>{toast.success(actionData.emailSuccess)}</div>
-      )}
-      {actionData?.emailError && toast.error(actionData.emailError)}
       <div className="mx-auto mt-4 flex max-w-lg flex-col items-center justify-center">
         <div className="my-6 w-full space-y-2 text-center">
           <TypographyH4 value="Let's work together, or have a small conversation" />
@@ -166,6 +174,10 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
               autoComplete="name"
               placeholder="Your name"
               disabled={isSubmitting}
+              className={
+                clientError?.name &&
+                "border-destructive focus:border-destructive focus:ring-destructive active:border-destructive invalid:border-destructive"
+              }
             />
             {clientError?.name?.message && (
               <TypographySmall
@@ -228,7 +240,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
 }
 
 export async function action({ request }: Route.ActionArgs) {
-  if (request.method.toLowerCase() !== "post") {
+  if (request?.method?.toLowerCase() !== "post") {
     return { methodError: "Method not allowed" };
   }
 
@@ -249,32 +261,30 @@ export async function action({ request }: Route.ActionArgs) {
   const validatedForm = contactFormSchema.safeParse(formValues);
 
   if (!validatedForm.success) {
-    return { serverFormValidationError: validatedForm.error };
+    return {
+      serverFormValidationError: validatedForm.error.issues.map((issue) => ({
+        path: issue.path.join("."),
+        message: issue.message,
+      })),
+    };
   }
 
-  try {
-    const { name, email, message } = validatedForm.data;
-    const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+  const { name, email, message } = validatedForm.data;
+  const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 
-    await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["sunnyjha98971@gmail.com"],
-      subject: "Portfolio Contact Form Submission",
-      html: `
+  const { error } = await resend.emails.send({
+    from: "Acme <onboarding@resend.dev>",
+    to: ["sunnyjha98971@gmail.com"],
+    subject: "Portfolio Contact Form Submission",
+    html: `
           <h2>New message from ${name}</h2>
           <p><strong>From:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         `,
-    });
+  });
+  if (error) return { emailError: "Failed to send email." };
 
-    return redirect("/") && { emailSuccess: "Email sent successfully!" };
-  } catch (error) {
-    console.error("Email sending error:", error);
-    return {
-      emailError:
-        "Failed to send email. Please try again later or contact directly at sunnyjha98971@gmail.com",
-    };
-  }
+  return { emailSuccess: true };
 }
