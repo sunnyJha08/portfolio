@@ -1,4 +1,4 @@
-import { Send, CircleX, CircleCheck, Info, CircleAlert } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -8,13 +8,7 @@ import {
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
-import {
-  Form,
-  Navigate,
-  redirect,
-  useNavigation,
-  useSubmit,
-} from "react-router";
+import { Form, Navigate, useNavigation, useSubmit } from "react-router";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "sonner";
