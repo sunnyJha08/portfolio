@@ -8,17 +8,26 @@ import {
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
-import { Form, useNavigate, useNavigation, useSubmit } from "react-router";
+import {
+  Form,
+  useLocation,
+  useNavigate,
+  useNavigation,
+  useSubmit,
+} from "react-router";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "sonner";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "~/components/ui/spinner";
-
-import { Resend } from "resend";
-import { z } from "zod";
+import {
+  contactFormSchema,
+  type SubmitFormSchemaType,
+} from "~/lib/schemas/contact.schema";
 import { useEffect, useRef } from "react";
+import { checkRateLimit } from "~/lib/rate-limit/contact.rate-limit";
+import { sendContactEmail } from "~/lib/services/contact-email.service";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -27,58 +36,9 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      error: "Name is required and must be between 2 and 64 characters.",
-    })
-    .max(64, {
-      error: "Name is required and must be between 2 and 64 characters.",
-    }),
-  email: z.email({ error: "Please enter a valid email address." }),
-  message: z
-    .string()
-    .min(10, {
-      error: "Message is required and must be between 10 and 160 characters.",
-    })
-    .max(160, {
-      error: "Message is required and must be between 10 and 160 characters.",
-    }),
-});
-
-type SubmitFormSchemaType = z.infer<typeof contactFormSchema>;
-
-// Rate limiting storage (in production, use Redis or database)
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
-
-// Helper function to check rate limit
-function checkRateLimit(ip: string): { allowed: boolean; message?: string } {
-  const now = Date.now();
-  const limit = rateLimitStore.get(ip);
-
-  // If no record or reset time passed, allow and create new record
-  if (!limit || now > limit.resetTime) {
-    rateLimitStore.set(ip, {
-      count: 1,
-      resetTime: now + 12 * 60 * 60 * 1000, // 12 hours from now
-    });
-    return { allowed: true };
-  }
-
-  // Check if limit exceeded
-  if (limit.count >= 2) {
-    const hoursLeft = Math.ceil((limit.resetTime - now) / (60 * 60 * 1000));
-    return {
-      allowed: false,
-      message: `Rate limit exceeded. You can submit 2 messages every 12 hours. Try again in ${hoursLeft} hour(s) or email me directly at 'sunnyjha98971@gmail.com.`,
-    };
-  }
-
-  // Increment count
-  limit.count++;
-  return { allowed: true };
-}
+/* -------------------------------------------------------------------------- */
+/*                                 COMPONENT                                  */
+/* -------------------------------------------------------------------------- */
 
 export default function ContactPage({ actionData }: Route.ComponentProps) {
   const submit = useSubmit();
@@ -96,7 +56,12 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
 
   // Show toast based on actionData
 
+  const location = useLocation();
   const hasShownToast = useRef(false);
+
+  useEffect(() => {
+    hasShownToast.current = false;
+  }, [location.key]);
 
   useEffect(() => {
     if (!actionData || hasShownToast.current) return;
@@ -110,7 +75,9 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
     }
 
     if (actionData.emailError) {
-      toast.error(actionData.emailError);
+      toast.error("Failed to send message.", {
+        description: actionData.emailError,
+      });
     }
 
     if (actionData.methodError) {
@@ -139,7 +106,6 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
 
   const onSubmit: SubmitHandler<SubmitFormSchemaType> = (data) => {
     // Submit form data to action
-
     submit(data, { method: "POST" });
   };
 
@@ -233,7 +199,12 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                 ACTION                                     */
+/* -------------------------------------------------------------------------- */
+
 export async function action({ request }: Route.ActionArgs) {
+  //Exit early if not POST
   if (request?.method !== "POST") {
     return { methodError: "Method not allowed" };
   }
@@ -250,10 +221,12 @@ export async function action({ request }: Route.ActionArgs) {
     return { rateLimitError: rateLimitCheck.message };
   }
 
+  // Parse and Validate form data
   const formData = await request.formData();
   const formValues = Object.fromEntries(formData);
   const validatedForm = contactFormSchema.safeParse(formValues);
 
+  // Handle validation errors
   if (!validatedForm.success) {
     return {
       serverFormValidationError: validatedForm.error.issues.map((issue) => ({
@@ -263,22 +236,13 @@ export async function action({ request }: Route.ActionArgs) {
     };
   }
 
-  const { name, email, message } = validatedForm.data;
-  const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
-
-  const { error } = await resend.emails.send({
-    from: "Acme <onboarding@resend.dev>",
-    to: ["sunnyjha98@gmail.com"],
-    subject: "Portfolio Contact Form Submission",
-    html: `
-          <h2>New message from ${name}</h2>
-          <p><strong>From:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>
-        `,
-  });
-  if (error) return { emailError: "Failed to send email." };
-
-  return { emailSuccess: true };
+  // Send contact email via external service
+  try {
+    await sendContactEmail(validatedForm.data);
+    return { emailSuccess: true };
+  } catch (error) {
+    return {
+      emailError: "External email service failed to send email.",
+    };
+  }
 }
