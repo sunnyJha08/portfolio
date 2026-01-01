@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "date": "2024-01-12",
+    "title": "Understanding Async Patterns in Modern JavaScript",
+    "summary": "A brief overview of async/await, promises, and concurrency patterns.",
+    "readTime": "6 min read",
+    "blogLink": "/blog/async-patterns"
+  },
+  {
+    "id": 2,
+    "date": "2024-01-20",
+    "title": "Why TypeScript Is Taking Over Frontend Development",
+    "summary": "Exploring the rise of TypeScript and its impact on frontend workflows.",
+    "readTime": "5 min read",
+    "blogLink": "/blog/typescript-growth"
+  },
+  {
+    "id": 3,
+    "date": "2024-02-03",
+    "title": "Optimizing React Apps for Performance",
+    "summary": "Techniques to reduce re-renders, optimize state, and improve runtime speed.",
+    "readTime": "8 min read",
+    "blogLink": "/blog/react-performance"
+  },
+  {
+    "id": 4,
+    "date": "2024-02-15",
+    "title": "A Beginner’s Guide to Docker for Developers",
+    "summary": "Learn the basics of containerization and how Docker fits into modern dev workflows.",
+    "readTime": "7 min read",
+    "blogLink": "/blog/docker-intro"
+  },
+  {
+    "id": 5,
+    "date": "2024-01-12",
+    "title": "Understanding Async Patterns in Modern JavaScript",
+    "summary": "A brief overview of async/await, promises, and concurrency patterns.",
+    "readTime": "6 min read",
+    "blogLink": "/blog/async-patterns"
+  },
+  {
+    "id": 6,
+    "date": "2024-02-03",
+    "title": "Optimizing React Apps for Performance",
+    "summary": "Techniques to reduce re-renders, optimize state, and improve runtime speed.",
+    "readTime": "8 min read",
+    "blogLink": "/blog/react-performance"
+  }
+]
