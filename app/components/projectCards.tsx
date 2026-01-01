@@ -2,8 +2,10 @@ import { CodeXml, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { TypographyH3, TypographyP } from "./ui/typography";
 import Badge from "./ui/badge";
+import projects from "~/routes/home/projectsMetaData.json";
 
-interface CardData {
+//Projects data type for project cards component.
+type CardData = {
   id: number;
   imageUrl: string;
   title: string;
@@ -11,92 +13,10 @@ interface CardData {
   liveLink: string;
   githubLink: string;
   badges: string[]; //0 <= Array of logo's
-}
+};
 interface CardProps {
   card: CardData;
 }
-
-const projects: CardData[] = [
-  {
-    id: 1,
-    imageUrl: "/projectImages/screenshot-2025-11-13_20-24-47.png",
-    title: "NotesBuddy",
-    description:
-      "A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools.",
-    liveLink: "#",
-    githubLink: "https://github.com/sunnyJha08",
-    badges: [
-      "ReactLogo",
-      "AWS",
-      "Bash",
-      "Django",
-      "Docker",
-      "Express",
-      "FastAPI",
-      "Figma",
-      "Git",
-      "GitHub",
-      "Go",
-    ],
-  },
-  {
-    id: 2,
-    imageUrl: "/projectImages/screenshot-2025-11-13_20-25-17.png",
-    title: "Appwrite MCP Server",
-    description:
-      "Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools and 99.9% success rate.",
-    liveLink: "#",
-    githubLink: "#",
-    badges: [
-      "GraphQL",
-      "JavaScript",
-      "Jenkins",
-      "JSON",
-      "Kubernetes",
-      "Markdown",
-      "MongoDB",
-      "Nextjs",
-    ],
-  },
-  {
-    id: 3,
-    imageUrl: "/projectImages/screenshot-2025-11-13_20-25-50.png",
-    title: "Pasandida Aurat",
-    description:
-      "Innovative dating platform featuring anonymous questions and authentic connections - currently in development.",
-    liveLink: "#",
-    githubLink: "#",
-    badges: [
-      "NGINX",
-      "Nodejs",
-      "OpenAPI",
-      "PostgresSQL",
-      "Python",
-      "Redis",
-      "SQLAlchemy",
-      "SQLite",
-    ],
-  },
-  {
-    id: 4,
-    imageUrl: "/projectImages/screenshot-2025-11-13_20-26-03.png",
-    title: "Syncify",
-    description:
-      "Real-time music streaming platform with synchronized playback, live chat, and social listening features.",
-    liveLink: "#",
-    githubLink: "#",
-    badges: [
-      "Swagger",
-      "TailwindCSS",
-      "Twitter",
-      "TypeScript",
-      "Ubuntu",
-      "Vercel",
-      "Vim",
-      "Vitejs",
-    ],
-  },
-];
 
 export const Card: React.FC<CardProps> = ({ card }) => {
   return (
