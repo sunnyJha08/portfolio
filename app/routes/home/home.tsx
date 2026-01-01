@@ -1,5 +1,5 @@
 import { ProfileImage } from "~/components/ui/profileImage";
-import type { Route } from "../+types/home";
+import type { Route } from "./+types/home";
 import {
   TypographyH1WithSpan,
   TypographyH2,
@@ -9,7 +9,7 @@ import { Button } from "~/components/ui/button";
 import { ChevronDown, FileUser, Send } from "lucide-react";
 import { Link } from "react-router";
 import { ProjectCardsContainer } from "~/components/projectCards";
-import { BlogsCardsContainer } from "~/components/blogsCards";
+import { BlogsCardsContainer } from "~/routes/blogs/blogs";
 import {
   Accordion,
   AccordionContent,
