@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <>
       {/* Hero section */}
-      <div className="relative w-fit">
+      <div className="blockFadeInOut relative w-fit">
         <ProfileImage className="mt-15 mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
         <ModeToggle />
       </div>
