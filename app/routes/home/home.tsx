@@ -32,7 +32,7 @@ export default function Home() {
     <>
       {/* Hero section */}
       <div className="blockFadeInOut relative w-fit">
-        <ProfileImage className="mt-15 mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
+        <ProfileImage className="mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
         <ModeToggle />
       </div>
       <TypographyH1WithSpan
@@ -70,11 +70,14 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <TypographyH2 value="Featured Projects" className="text-primary" />
+      <TypographyH2 value="Featured Projects" className="text-primary mt-10" />
       <ProjectCardsContainer />
 
       {/* Blogs Section  */}
-      <TypographyH2 value="Technical Writtings" className="text-primary" />
+      <TypographyH2
+        value="Technical Writtings"
+        className="text-primary mt-10"
+      />
       <BlogsCardsContainer limit={4} />
 
       {/* A link to the Blogs Route */}
@@ -90,7 +93,7 @@ export default function Home() {
       </Link>
       <TypographyH2
         value="Frequently asked questions"
-        className="text-primary"
+        className="text-primary mt-10"
       />
 
       {/* FAQ's section within Accordion component  */}

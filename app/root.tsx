@@ -58,7 +58,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <Header />
-      <main className="relative mx-auto max-w-3xl px-4 py-4">
+      <main className="relative mx-auto max-w-3xl px-8 py-16">
         <Outlet />
       </main>
       <Toaster />

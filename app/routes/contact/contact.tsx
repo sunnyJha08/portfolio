@@ -2,9 +2,9 @@ import { Send } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
-  TypographyH4,
+  TypographyH2,
   TypographyLead,
-  TypographyMuted,
+  TypographyP,
   TypographySmall,
 } from "~/components/ui/typography";
 import type { Route } from "./+types/contact";
@@ -28,6 +28,7 @@ import {
 import { useEffect, useRef } from "react";
 import { checkRateLimit } from "~/lib/rate-limit/contact.rate-limit";
 import { sendContactEmail } from "~/lib/services/contact-email.service";
+import clsx from "clsx";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -111,21 +112,26 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
 
   return (
     <>
-      <div className="mx-auto mt-4 flex max-w-lg flex-col items-center justify-center">
-        <div className="my-6 w-full space-y-2 text-center">
-          <TypographyH4 value="Let's work together, or have a small conversation" />
-          <TypographyMuted value="Fill out the form below and I will get back to you as soon as possible." />
+      <div className="mx-auto flex max-w-lg flex-col items-center justify-center">
+        <div className="w-full space-y-2 text-center">
+          <TypographyH2 value="Contact" />
+          <TypographyP value="Let's work together, or have a small conversation." />
         </div>
         <Form
           method="POST"
           noValidate
           onSubmit={handleSubmit(onSubmit)}
-          className="border-border bg-card flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
+          className="border-border bg-card mt-6 flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
         >
           <TypographyLead value="Send Message" />
 
           <div className="space-y-2">
-            <Label htmlFor="name">Name *</Label>
+            <Label
+              htmlFor="name"
+              className={clientError?.name && "text-destructive"}
+            >
+              Name *
+            </Label>
             <Input
               {...register("name")}
               type="text"
@@ -134,10 +140,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
               autoComplete="name"
               placeholder="Your name"
               disabled={isSubmitting}
-              className={
-                clientError?.name &&
-                "border-destructive focus:border-destructive focus:ring-destructive active:border-destructive invalid:border-destructive"
-              }
+              className={clientError?.name && "border-destructive"}
             />
             {clientError?.name?.message && (
               <TypographySmall
@@ -148,7 +151,12 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
+            <Label
+              htmlFor="email"
+              className={clientError?.email && "text-destructive"}
+            >
+              Email *
+            </Label>
             <Input
               {...register("email")}
               type="email"
@@ -157,6 +165,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
               autoComplete="email"
               placeholder="sunnyjha98971@gmail.com"
               disabled={isSubmitting}
+              className={clientError?.email && "border-destructive"}
             />
             {clientError?.email?.message && (
               <TypographySmall
@@ -167,13 +176,21 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Your message *</Label>
+            <Label
+              htmlFor="message"
+              className={clientError?.message && "text-destructive"}
+            >
+              Your message *
+            </Label>
             <Textarea
               {...register("message")}
               id="message"
               name="message"
-              className="h-30"
-              placeholder="If somehow this lambda function didn't work for contact form. You can mail me on 'sunnyjha98971@gmail.com'."
+              className={clsx("h-30", {
+                "border-destructive focus:border-destructive focus:ring-destructive":
+                  clientError?.message,
+              })}
+              placeholder="Fill out the form below and I will get back to you as soon as possible."
               disabled={isSubmitting}
             />
             {clientError?.message?.message && (

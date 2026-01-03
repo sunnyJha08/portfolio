@@ -1,5 +1,5 @@
 import {
-  TypographyH1,
+  TypographyH2,
   TypographyH4,
   TypographyMuted,
   TypographyP,
@@ -68,7 +68,12 @@ export const BlogsCardsContainer: React.FC<{ limit?: number }> = ({
 export default function Blogs() {
   return (
     <div>
-      <TypographyH1 value="Heading for Blogs route" />
+      <TypographyH2 value="Blogs" className="pb-2 text-center" />
+      <TypographyP
+        value="Thoughts, tutorials, and insights on engineering, and programming."
+        className="p-2 text-center"
+      />
+
       <BlogsCardsContainer />
     </div>
   );

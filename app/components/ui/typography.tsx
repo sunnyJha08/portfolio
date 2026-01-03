@@ -45,7 +45,6 @@ export function TypographyH2({ value, className }: TypographyProps) {
     "text-3xl",
     "font-semibold",
     "tracking-tight",
-    "mt-15",
     className,
   );
   return <h2 className={combinedCN}>{value}</h2>;
