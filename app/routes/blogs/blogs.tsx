@@ -32,7 +32,7 @@ interface BlogProps {
 
 export const BlogCard: React.FC<BlogProps> = ({ card }) => {
   return (
-    <div className="bg-card border-border flex h-full w-full flex-col gap-2 overflow-hidden rounded-lg p-4 shadow-sm transition duration-300 hover:shadow-xl">
+    <div className="bg-card border-border intro flex h-full w-full flex-col gap-2 overflow-hidden rounded-lg p-4 shadow-sm transition duration-300 hover:shadow-xl">
       <TypographyMuted value={card.date} />
       <TypographyH4 value={card.title} className="text-card-foreground" />
       <TypographyP value={card.summary} className="mb-2" />
@@ -68,10 +68,10 @@ export const BlogsCardsContainer: React.FC<{ limit?: number }> = ({
 export default function Blogs() {
   return (
     <div>
-      <TypographyH2 value="Blogs" className="pb-2 text-center" />
+      <TypographyH2 value="Blogs" className="intro pb-2 text-center" />
       <TypographyP
         value="Thoughts, tutorials, and insights on engineering, and programming."
-        className="p-2 text-center"
+        className="intro p-2 text-center"
       />
 
       <BlogsCardsContainer />

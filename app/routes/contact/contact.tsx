@@ -112,7 +112,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
 
   return (
     <>
-      <div className="mx-auto flex max-w-lg flex-col items-center justify-center">
+      <div className="intro mx-auto flex max-w-lg flex-col items-center justify-center">
         <div className="w-full space-y-2 text-center">
           <TypographyH2 value="Contact" />
           <TypographyP value="Let's work together, or have a small conversation." />
@@ -121,7 +121,7 @@ export default function ContactPage({ actionData }: Route.ComponentProps) {
           method="POST"
           noValidate
           onSubmit={handleSubmit(onSubmit)}
-          className="border-border bg-card mt-6 flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
+          className="border-border bg-card intro mt-6 flex w-full flex-col gap-4 rounded-lg border p-4 shadow-sm"
         >
           <TypographyLead value="Send Message" />
 

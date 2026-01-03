@@ -31,22 +31,22 @@ export default function Home() {
   return (
     <>
       {/* Hero section */}
-      <div className="blockFadeInOut relative w-fit">
+      <div className="intro relative w-fit">
         <ProfileImage className="mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
         <ModeToggle />
       </div>
       <TypographyH1WithSpan
         value="Sunny Jha:- "
-        className="text-foreground mb-3"
+        className="text-foreground intro mb-3"
         spanValue="A Full Stack developer."
       />
       <TypographyLead
         value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
-        className="mb-3"
+        className="intro mb-3"
       />
 
       {/* Resume and contact page navigating button  */}
-      <section className="flex gap-4">
+      <section className="intro flex gap-4">
         <Link
           to={
             "https://docs.google.com/document/d/1pKFNbJ28OiDXfHsG8rIfnGwz1360jPJ_RCnpRStaLL8/edit?usp=sharing"
@@ -70,13 +70,16 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <TypographyH2 value="Featured Projects" className="text-primary mt-10" />
+      <TypographyH2
+        value="Featured Projects"
+        className="text-primary intro mt-10"
+      />
       <ProjectCardsContainer />
 
       {/* Blogs Section  */}
       <TypographyH2
         value="Technical Writtings"
-        className="text-primary mt-10"
+        className="text-primary intro mt-10"
       />
       <BlogsCardsContainer limit={4} />
 
@@ -84,7 +87,7 @@ export default function Home() {
       <Link
         to={"/blogs"}
         aria-label="Blogs page link"
-        className="mt-4 flex items-center justify-center gap-1"
+        className="intro mt-4 flex items-center justify-center gap-1"
       >
         <Button variant={"ghost"} className="cursor-pointer">
           See All Blogs
@@ -93,11 +96,11 @@ export default function Home() {
       </Link>
       <TypographyH2
         value="Frequently asked questions"
-        className="text-primary mt-10"
+        className="text-primary intro mt-10"
       />
 
       {/* FAQ's section within Accordion component  */}
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible className="intro">
         <AccordionItem value="item-1">
           <AccordionTrigger>What is this component used for?</AccordionTrigger>
           <AccordionContent>

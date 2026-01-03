@@ -1,5 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -16,20 +23,32 @@ body {
   }
 }
 
-@keyframes fadeInOut {
-  from {
+@keyframes fade-up {
+  0% {
     opacity: 0;
-    scale: 0.5;
+    transform: translateY(20px) scale(0.9);
   }
-  to {
+  100% {
     opacity: 1;
-    scale: 1;
+    transform: translateY(0px) scale(1);
   }
 }
-.blockFadeInOut {
-  animation: fadeInOut linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+.navIntro {
+  animation: fade-down 0.1s;
+}
+.intro {
+  /* padding-top: 125px; */
+  animation: fade-up 0.1s;
 }
 
 @theme inline {

@@ -24,16 +24,17 @@ export const meta = () => [
 ];
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
+    rel: "preload",
+    href: "profilePic.avif",
+    as: "image",
   },
   {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    rel: "preload",
+    href: "projectImages/premium_photo-1661698763470-55da05629e50.avif",
+    as: "image",
   },
+  { rel: "preconnect", href: "/fonts/InterVariable.woff2", as: "style" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
