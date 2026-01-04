@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { ProfileImage } from "./ui/profileImage";
 export default function Header() {
   return (
-    <header className="navIntro sticky top-0 z-20 mx-auto flex w-screen max-w-3xl items-center justify-between px-8 py-4 shadow-sm backdrop-blur-sm">
+    <header className="navIntro border-border sticky top-0 z-20 mx-auto flex w-screen max-w-3xl items-center justify-between border-b px-8 py-4 backdrop-blur-sm">
       <NavLink to={"/"} aria-label="Home page link">
         <ProfileImage
           className={

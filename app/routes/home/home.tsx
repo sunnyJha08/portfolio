@@ -43,7 +43,7 @@ export default function Home() {
         />
         <TypographyLead
           value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
-          className="intro"
+          className="intro pb-2"
         />
 
         {/* Resume and contact page navigating button  */}
@@ -69,6 +69,8 @@ export default function Home() {
             </Button>
           </Link>
         </section>
+
+        {/* Social icons and links adding soon */}
       </div>
       {/* Projects Section */}
       <TypographyH2
