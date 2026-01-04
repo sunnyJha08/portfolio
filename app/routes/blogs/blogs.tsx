@@ -7,6 +7,7 @@ import {
 } from "~/components/ui/typography";
 import type { Route } from "./+types/blogs";
 import blogs from "./blogsMetaData.json";
+import { ArrowUpRight } from "lucide-react";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Blogs | Sunny Jha" },
@@ -43,9 +44,9 @@ export const BlogCard: React.FC<BlogProps> = ({ card }) => {
           href={card.blogLink}
           target="_blank"
           aria-label={card.title}
-          className="cursor-pointer hover:underline"
+          className="hover:text-neutral-500"
         >
-          <TypographySmall value="Learn more" />
+          <ArrowUpRight />
         </a>
       </div>
     </div>

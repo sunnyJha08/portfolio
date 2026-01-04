@@ -28,13 +28,20 @@ export const links: Route.LinksFunction = () => [
     rel: "preload",
     href: "profilePic.avif",
     as: "image",
+    priority: "high",
+  },
+  {
+    rel: "preconnect",
+    href: "/fonts/InterVariable.woff2",
+    as: "style",
+    priority: "high",
   },
   {
     rel: "preload",
     href: "projectImages/premium_photo-1661698763470-55da05629e50.avif",
     as: "image",
+    priority: "low",
   },
-  { rel: "preconnect", href: "/fonts/InterVariable.woff2", as: "style" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
