@@ -35,40 +35,41 @@ export default function Home() {
         <ProfileImage className="mb-6 size-24 rounded-full border border-black/20 p-0.5 dark:border-white/20" />
         <ModeToggle />
       </div>
-      <TypographyH1WithSpan
-        value="Sunny Jha:- "
-        className="text-foreground intro mb-3"
-        spanValue="A Full Stack developer."
-      />
-      <TypographyLead
-        value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
-        className="intro mb-3"
-      />
+      <div className="space-y-4">
+        <TypographyH1WithSpan
+          value="Sunny Jha :- "
+          className="text-foreground intro"
+          spanValue="A Full Stack developer."
+        />
+        <TypographyLead
+          value="I build interactive web apps using Typescript, React, Next.js, Bun and PostgreSQL. With a focus on UI design. Enthusiastic about Three.js, driven by a keen eye for design."
+          className="intro"
+        />
 
-      {/* Resume and contact page navigating button  */}
-      <section className="intro flex gap-4">
-        <Link
-          to={
-            "https://docs.google.com/document/d/1pKFNbJ28OiDXfHsG8rIfnGwz1360jPJ_RCnpRStaLL8/edit?usp=sharing"
-          }
-        >
-          <Button
-            variant={"outline"}
-            className="cursor-pointer"
-            aria-label="Resume button"
+        {/* Resume and contact page navigating button  */}
+        <section className="intro flex gap-4">
+          <Link
+            to={
+              "https://docs.google.com/document/d/1pKFNbJ28OiDXfHsG8rIfnGwz1360jPJ_RCnpRStaLL8/edit?usp=sharing"
+            }
           >
-            <FileUser />
-            Resume / CV
-          </Button>
-        </Link>
-        <Link to={"/contact"} aria-label="Contact page link">
-          <Button className="cursor-pointer" aria-label="Contact button">
-            <Send />
-            Get in touch
-          </Button>
-        </Link>
-      </section>
-
+            <Button
+              variant={"outline"}
+              className="cursor-pointer"
+              aria-label="Resume button"
+            >
+              <FileUser />
+              Resume / CV
+            </Button>
+          </Link>
+          <Link to={"/contact"} aria-label="Contact page link">
+            <Button className="cursor-pointer" aria-label="Contact button">
+              <Send />
+              Get in touch
+            </Button>
+          </Link>
+        </section>
+      </div>
       {/* Projects Section */}
       <TypographyH2
         value="Featured Projects"
